@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KRdahee | System Engineer</title>
+<style>
+  :root{--bg:#0b1b2e;--bg2:#10253c;--card:#132b45;--line:#26405e;--text:#e8edf3;--muted:#9fb0c3;--orange:#f28c28;--blue:#4fb3f6}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Pretendard","Noto Sans KR","맑은 고딕",system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+  /* nav */
+  nav{position:sticky;top:0;z-index:10;background:rgba(11,27,46,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;justify-content:space-between;align-items:center;height:56px}
+  nav .logo{font-weight:700}
+  nav ul{display:flex;gap:22px;list-style:none;font-size:14px;color:var(--muted)}
+  nav ul a:hover{color:var(--orange)}
+  /* hero */
+  .hero{padding:90px 0 70px;background:linear-gradient(180deg,#0e2540 0%,var(--bg) 100%)}
+  .hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+  .role{color:var(--orange);font-weight:600;font-size:14px}
+  h1{font-size:40px;line-height:1.3;margin:8px 0 14px}
+  .stack{color:var(--muted);font-size:14px;margin-bottom:12px}
+  .desc{color:var(--muted);font-size:14px;margin-bottom:26px}
+  .btn{display:inline-block;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;margin-right:8px}
+  .btn.primary{background:var(--orange);color:#1a1205}
+  .btn.ghost{border:1px solid var(--muted);color:var(--text)}
+  .btn:hover{opacity:.85}
+  .term{background:#07121f;border:1px solid var(--line);border-radius:10px;padding:18px;font-family:Consolas,monospace;font-size:13px;color:var(--blue)}
+  .term .dim{color:var(--muted)}
+  .term .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+  /* sections */
+  section{padding:56px 0}
+  h2{font-size:22px;margin-bottom:22px;display:flex;align-items:center;gap:10px}
+  h2::before{content:"";width:6px;height:22px;background:var(--orange);border-radius:3px}
+  .about{display:grid;grid-template-columns:2fr 1fr;gap:30px;color:var(--muted);font-size:15px}
+  .about ul{list-style:none;font-size:14px}
+  .about li{margin-bottom:8px}
+  .about li b{color:var(--orange);margin-right:8px}
+  /* tech */
+  .tech{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+  .tech div{background:var(--card);border:1px solid var(--line);border-radius:10px;text-align:center;padding:16px 8px;font-size:13px}
+  .tech i{display:flex;align-items:center;justify-content:center;width:42px;height:42px;margin:0 auto 8px;border-radius:50%;font-style:normal;font-weight:700;font-size:13px;color:#fff}
+  /* projects */
+  .projects{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;transition:.2s}
+  .card:hover{border-color:var(--orange);transform:translateY(-3px)}
+  .card h3{font-size:16px;margin-bottom:4px}
+  .card .tags{font-size:12px;color:var(--blue);margin-bottom:10px}
+  .card p{font-size:13px;color:var(--muted);margin-bottom:12px}
+  .card a{font-size:13px;color:var(--orange)}
+  /* contributions */
+  .graph{display:grid;grid-template-rows:repeat(7,12px);grid-auto-flow:column;grid-auto-columns:12px;gap:3px;overflow-x:auto;padding-bottom:8px}
+  .graph span{width:12px;height:12px;border-radius:2px;background:#15283d}
+  .graph .l1{background:#5a3a14}.graph .l2{background:#8f5a1a}.graph .l3{background:#c9791f}.graph .l4{background:var(--orange)}
+  .note{font-size:12px;color:var(--muted);margin-top:6px}
+  footer{border-top:1px solid var(--line);padding:26px 0;text-align:center;font-size:13px;color:var(--muted)}
+  @media(max-width:760px){
+    .hero .wrap,.about{grid-template-columns:1fr}
+    .tech{grid-template-columns:repeat(3,1fr)}
+    .projects{grid-template-columns:1fr}
+    h1{font-size:30px}
+    nav ul{gap:12px;font-size:12px}
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="logo" href="#home">KRdahee</a>
+  <ul>
+    <li><a href="#home">Home</a></li><li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li><li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</div></nav>
+
+<header class="hero" id="home"><div class="wrap">
+  <div>
+    <div class="role">System Engineer</div>
+    <h1>안녕하세요,<br>이다희 입니다.</h1>
+    <div class="stack">Linux · Server · HPC · SLURM · Python · AI Agent</div>
+    <p class="desc">안정적인 인프라 운영과 문제 해결을 통해<br>서비스의 연속성을 지키는 시스템 엔지니어입니다.</p>
+    <a class="btn primary" href="#projects">프로젝트 보기</a>
+    <!-- 이력서 파일을 저장소에 resume.docx 이름으로 올리면 연결됩니다 -->
+    <a class="btn ghost" href="resume.docx" download>이력서 다운로드</a>
+  </div>
+  <div class="term">
+    <div><span class="dot" style="background:#ff5f56"></span><span class="dot" style="background:#ffbd2e"></span><span class="dot" style="background:#27c93f"></span></div>
+    <div style="margin-top:12px"><span class="dim">$</span> uptime</div>
+    <div id="uptime">10:23:45 up 12 days, load average: 0.08</div>
+    <div style="margin-top:8px"><span class="dim">$</span> whoami</div>
+    <div>dahee — system engineer</div>
+  </div>
+</div></header>
+
+<section id="about"><div class="wrap">
+  <h2>About Me</h2>
+  <div class="about">
+    <p>IT 인프라와 시스템 운영에 관심이 많으며,<br>문제를 발견하고 원인을 분석하여 안정적인 환경을 구축하는 것을 좋아합니다.<br><br>최근에는 AI Agent를 활용한 프로젝트를 진행하며, 더 스마트한 운영 환경을 만들기 위해 노력하고 있습니다.</p>
+    <ul id="contact">
+      <li><b>Loc</b>Cheonan, Korea</li>
+      <li><b>Email</b><a href="mailto:dahee@naver.com">dahee@naver.com</a></li>
+      <li><b>GitHub</b><a href="https://github.com/KRdahee">github.com/KRdahee</a></li>
+      <li><b>LinkedIn</b><a href="https://linkedin.com/in/dahee">linkedin.com/in/dahee</a></li>
+    </ul>
+  </div>
+</div></section>
+
+<section id="skills"><div class="wrap">
+  <h2>Tech Stack</h2>
+  <div class="tech">
+    <div><i style="background:#e0a100">Lx</i>Linux</div>
+    <div><i style="background:#0078d4">Win</i>Windows</div>
+    <div><i style="background:#2496ed">Dk</i>Docker</div>
+    <div><i style="background:#326ce5">K8s</i>Kubernetes</div>
+    <div><i style="background:#3a4a63">SL</i>SLURM</div>
+    <div><i style="background:#3776ab">Py</i>Python</div>
+    <div><i style="background:#e76f00">Jv</i>Java</div>
+    <div><i style="background:#6db33f">Sp</i>Spring Boot</div>
+    <div><i style="background:#f46800">Gf</i>Grafana</div>
+    <div><i style="background:#e6522c">Pm</i>Prometheus</div>
+  </div>
+</div></section>
+
+<section id="projects"><div class="wrap">
+  <h2>Featured Projects</h2>
+  <div class="projects">
+    <div class="card">
+      <h3>HPC 클러스터 운영</h3>
+      <div class="tags">Linux · SLURM · Monitoring</div>
+      <p>약 210대 노드 규모의 HPC 클러스터 운영 및 유지보수 경험</p>
+      <a href="#">자세히 보기 →</a>
+    </div>
+    <div class="card">
+      <h3>공기업 기획서 자동 검토</h3>
+      <div class="tags">Python · LangGraph · Gemini</div>
+      <p>AI Agent 기반 기획서 분석 및 3단 구조 자동 변환 시스템</p>
+      <a href="#">자세히 보기 →</a>
+    </div>
+    <div class="card">
+      <h3>Java 웹 개발</h3>
+      <div class="tags">Java · Spring Boot · JSP</div>
+      <p>Java 기반 웹 애플리케이션 개발 경험</p>
+      <a href="#">자세히 보기 →</a>
+    </div>
+  </div>
+</div></section>
+
+<section id="contrib"><div class="wrap">
+  <h2>GitHub Contributions</h2>
+  <div class="graph" id="graph"></div>
+  <div class="note">※ 샘플 데이터입니다. 실제 활동 그래프는 README의 안내를 참고해 교체하세요.</div>
+</div></section>
+
+<footer id="contact-footer">© 2026 KRdahee · <a href="https://github.com/KRdahee">GitHub</a></footer>
+
+<script>
+  // sample contribution grid (53 weeks x 7 days)
+  const g=document.getElementById('graph');
+  for(let i=0;i<53*7;i++){
+    const s=document.createElement('span');
+    const r=Math.random();
+    if(r>.9)s.className='l4';else if(r>.8)s.className='l3';else if(r>.68)s.className='l2';else if(r>.55)s.className='l1';
+    g.appendChild(s);
+  }
+  // live clock in terminal
+  const u=document.getElementById('uptime');
+  setInterval(()=>{const d=new Date();u.textContent=d.toTimeString().slice(0,8)+" up 12 days, load average: 0.08"},1000);
+</script>
+</body>
+</html>
