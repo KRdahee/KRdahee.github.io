@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>이다희 | System Engineer Portfolio</title>
+<meta name="description" content="Linux HPC·SLURM 시스템 엔지니어, AI Agent 개발자 이다희의 포트폴리오">
+<style>
+  :root{--bg:#ffead5;--bg2:#d9e9e1;--card:#fff6ec;--chip:#d6e6e0;--line:#b7d0c7;--text:#2e4943;--muted:#5f7a73;--orange:#e78895;--rose-d:#b84d60;--blue:#3f7468;--sage:#89b9ad;--forest:#3f7468}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:70px}
+  body{font-family:"Pretendard","Noto Sans KR","맑은 고딕",system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+
+  nav{position:sticky;top:0;z-index:20;background:rgba(11,27,46,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;justify-content:space-between;align-items:center;height:58px}
+  nav .logo{font-weight:800;letter-spacing:.3px}
+  nav .logo span{color:var(--orange)}
+  nav ul{display:flex;gap:22px;list-style:none;font-size:14px;color:var(--muted)}
+  nav ul a:hover{color:var(--orange)}
+
+  .hero{position:relative;overflow:hidden;padding:96px 0 72px;background:radial-gradient(900px 400px at 85% 0%,rgba(242,140,40,.18),transparent 60%),radial-gradient(700px 400px at 0% 100%,rgba(79,179,246,.12),transparent 60%),var(--bg2)}
+  .hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+  .role{display:inline-block;color:var(--orange);font-weight:700;font-size:13px;letter-spacing:1px;border:1px solid var(--orange);border-radius:99px;padding:2px 14px}
+  h1{font-size:44px;line-height:1.25;margin:16px 0 14px}
+  h1 em{font-style:normal;color:var(--orange)}
+  .stack{color:var(--blue);font-size:14px;margin-bottom:12px}
+  .desc{color:var(--muted);font-size:15px;margin-bottom:28px}
+  .btn{display:inline-block;padding:11px 22px;border-radius:9px;font-size:14px;font-weight:700;margin:0 8px 8px 0;transition:.2s}
+  .btn.primary{background:var(--orange);color:#1a1205}
+  .btn.ghost{border:1px solid var(--muted)}
+  .btn:hover{transform:translateY(-2px);opacity:.9}
+  .term{background:#07121f;border:1px solid var(--line);border-radius:12px;padding:18px 20px;font-family:Consolas,"D2Coding",monospace;font-size:13px;color:var(--blue);box-shadow:0 20px 50px rgba(0,0,0,.35)}
+  .term .dim{color:var(--muted)}
+  .term .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+  .term .ok{color:#3ddc84}
+  .cursor{display:inline-block;width:8px;height:14px;background:var(--orange);vertical-align:middle;animation:blink 1s steps(2) infinite}
+  @keyframes blink{50%{opacity:0}}
+
+  .stats{margin-top:-34px;position:relative;z-index:2}
+  .stats .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .stat{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--orange);border-radius:12px;padding:20px;text-align:center}
+  .stat b{display:block;font-size:34px;color:var(--orange);line-height:1.2}
+  .stat span{font-size:13px;color:var(--muted)}
+
+  section{padding:60px 0}
+  h2{font-size:24px;margin-bottom:26px;display:flex;align-items:center;gap:12px}
+  h2::before{content:"";width:6px;height:24px;background:var(--orange);border-radius:3px}
+  .reveal{opacity:0;transform:translateY(24px);transition:.7s}
+  .reveal.on{opacity:1;transform:none}
+
+  .about{display:grid;grid-template-columns:1.6fr 1fr;gap:34px;color:var(--muted);font-size:15px}
+  .about p+p{margin-top:12px}
+  .info{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;font-size:14px;list-style:none;align-self:start}
+  .info li{margin-bottom:10px}
+  .info b{display:inline-block;width:70px;color:var(--orange)}
+
+  .timeline{position:relative;padding-left:28px;border-left:2px solid var(--line)}
+  .tl-item{position:relative;margin-bottom:28px}
+  .tl-item::before{content:"";position:absolute;left:-37px;top:8px;width:14px;height:14px;border-radius:50%;background:var(--orange);border:3px solid var(--bg)}
+  .tl-item.now::before{background:var(--blue);box-shadow:0 0 0 6px rgba(79,179,246,.2)}
+  .tl-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px}
+  .tl-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+  .tl-head h3{font-size:18px}
+  .period{font-size:13px;color:var(--muted)}
+  .sub{color:var(--blue);font-size:13px;margin:2px 0 12px}
+  .tl-card ul{padding-left:18px;font-size:14px;color:#c9d4e0}
+  .tl-card li{margin-bottom:4px}
+  .tl-card li::marker{color:var(--orange)}
+
+  .skills{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .skill{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px}
+  .skill h3{font-size:15px;color:var(--orange);margin-bottom:12px}
+  .chip{display:inline-block;background:var(--chip);color:var(--blue);font-size:12.5px;padding:3px 11px;border-radius:99px;margin:0 6px 8px 0}
+
+  .projects{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;transition:.25s;position:relative}
+  .card:hover{border-color:var(--orange);transform:translateY(-4px)}
+  .card h3{font-size:17px;margin-bottom:4px}
+  .tags{font-size:12.5px;color:var(--blue);margin-bottom:10px}
+  .card p{font-size:14px;color:var(--muted)}
+  .badge{position:absolute;top:18px;right:18px;font-size:11px;background:rgba(79,179,246,.15);color:var(--blue);border-radius:99px;padding:2px 10px}
+
+  .two{display:grid;grid-template-columns:1.4fr 1fr;gap:24px}
+  .list{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px}
+  .list h3{font-size:15px;color:var(--orange);margin-bottom:12px}
+  .row{display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:7px 0;border-bottom:1px dashed var(--line)}
+  .row:last-child{border-bottom:0}
+  .row span{color:var(--muted);font-size:13px;white-space:nowrap}
+
+  .contrib{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;overflow-x:auto;text-align:center}
+  .contrib img{max-width:100%;min-width:640px}
+  .contrib p{font-size:13px;color:var(--muted)}
+
+  .contact{text-align:center}
+  .contact p{color:var(--muted);margin-bottom:22px}
+  footer{border-top:1px solid var(--line);padding:26px 0;text-align:center;font-size:13px;color:var(--muted)}
+
+  @media(max-width:820px){
+    .hero .wrap,.about,.two{grid-template-columns:1fr}
+    .skills,.projects{grid-template-columns:1fr}
+    .stats .grid{grid-template-columns:1fr}
+    h1{font-size:32px}
+    nav ul{gap:12px;font-size:12px}
+  }
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.cursor{animation:none}}
+
+  /* ---- Sage / Rose / Peach palette overrides ---- */
+  nav{background:rgba(255,234,213,.92)}
+  .hero{background:radial-gradient(700px 360px at 90% 0%,rgba(231,136,149,.30),transparent 60%),linear-gradient(135deg,#89b9ad 0%,#bcd9cf 55%,#ffead5 100%)}
+  .role{color:var(--rose-d);border-color:var(--orange);background:rgba(255,246,236,.6)}
+  h1 em{color:var(--rose-d)}
+  .stack{color:var(--forest);font-weight:600}
+  .btn.primary{background:var(--orange);color:#2e4943}
+  .btn.ghost{border-color:var(--forest);color:var(--forest)}
+  .term{background:#24403a;border-color:#3f7468;color:#a9d6c9;box-shadow:0 20px 50px rgba(46,73,67,.35)}
+  .term .dim{color:#8fb5aa}
+  .term div{color:#ffead5}
+  .term .ok{color:#9be3c0}
+  .cursor{background:var(--orange)}
+  .stat b,.info b,.skill h3,.list h3{color:var(--rose-d)}
+  .stat{box-shadow:0 8px 24px rgba(63,116,104,.12)}
+  h2::before{background:var(--orange)}
+  #skills,#education,#activity{background:#d3e7df}
+  .tl-item::before{background:var(--orange)}
+  .tl-item.now::before{background:var(--forest);box-shadow:0 0 0 6px rgba(63,116,104,.2)}
+  .tl-card ul{color:var(--text)}
+  .sub,.tags,.badge{color:var(--forest)}
+  .badge{background:rgba(231,136,149,.25);color:var(--rose-d)}
+  .chip{color:var(--forest)}
+  .card:hover{border-color:var(--orange);box-shadow:0 10px 26px rgba(231,136,149,.25)}
+  .card,.tl-card,.skill,.list,.contrib,.info{box-shadow:0 4px 14px rgba(63,116,104,.08)}
+  .info b{width:88px}
+  .desc{color:var(--text)}
+  footer{background:#3f7468;color:#ffead5;border-top:0}
+  .contrib p a,.about a{color:var(--rose-d)}
+
+  /* ---- hero greeting: KR one line + EN ---- */
+  .hero .wrap{grid-template-columns:1.5fr 1fr}
+  h1{font-size:clamp(28px,3.6vw,42px);white-space:nowrap;margin:16px 0 4px}
+  h1 em{font-weight:800}
+  .en{font-family:'Oswald','Arial Narrow','Roboto Condensed',sans-serif;font-weight:300;font-size:clamp(26px,3.4vw,40px);letter-spacing:1px;line-height:1.3;margin-bottom:14px;opacity:.95}
+  .en em{font-style:normal;font-weight:400;color:var(--rose-d)}
+  @media(max-width:820px){h1{white-space:normal}}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="logo" href="#home">Lee<span> Dahee</span></a>
+  <ul>
+    <li><a href="#about">About</a></li><li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li><li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li><li><a href="#contact">Contact</a></li>
+  </ul>
+</div></nav>
+
+<header class="hero" id="home"><div class="wrap">
+  <div>
+    <span class="role">SYSTEM ENGINEER</span>
+    <h1>안녕하세요, <em>이다희</em>입니다.</h1>
+    <div class="stack">Linux · HPC · SLURM · Server &amp; Infra · AI Agent</div>
+    <p class="desc">안정적인 인프라 구축과 사용자 지원에 중점을 둔 시스템 엔지니어입니다.<br>운영 경험 위에 AI Agent 개발 역량을 더하고 있습니다.</p>
+    <a class="btn primary" href="#projects">프로젝트 보기</a>
+    <!-- 이력서 파일을 저장소에 resume.docx 이름으로 올리면 연결됩니다 -->
+    <a class="btn ghost" href="resume.docx" download>이력서 다운로드</a>
+  </div>
+  <div class="term">
+    <div><span class="dot" style="background:#ff5f56"></span><span class="dot" style="background:#ffbd2e"></span><span class="dot" style="background:#27c93f"></span></div>
+    <div style="margin-top:12px"><span class="dim">$</span> whoami</div>
+    <div>dahee — system engineer</div>
+    <div style="margin-top:8px"><span class="dim">$</span> sinfo -s</div>
+    <div><span class="ok">●</span> compute nodes ~210 &nbsp;state: <span class="ok">up</span></div>
+    <div style="margin-top:8px"><span class="dim">$</span> <span id="typed"></span><span class="cursor"></span></div>
+  </div>
+</div></header>
+
+<div class="stats"><div class="wrap"><div class="grid">
+  <div class="stat"><b data-count="210" data-suffix="+">0</b><span>컴퓨팅 노드 규모 HPC 인프라 운영</span></div>
+  <div class="stat"><b data-count="900" data-suffix="+">0</b><span>기술 지원한 연구원 사용자</span></div>
+  <div class="stat"><b data-count="4" data-suffix="대 핵심 역량">0</b><span>서버 운영 · 인프라 관리 · 기술지원 · 장애 대응</span></div>
+</div></div></div>
+
+<section id="about"><div class="wrap reveal">
+  <h2>About Me</h2>
+  <div class="about">
+    <div>
+      <p>IT 시스템 운영, 트러블슈팅 및 기술 지원 경험을 쌓아온 엔지니어입니다. 시스템 상태 점검, 문제 해결, 사용자 계정 및 접근 권한 관리, 소프트웨어 설치 및 기술 지원을 포함한 Linux 기반 서버 인프라 운영·유지보수를 수행했습니다.</p>
+      <p>약 900명의 연구원을 지원하며 기술적인 문제를 파악하고, 사용자가 이해하기 쉽게 해결책을 설명해 왔습니다. 쉘 스크립트 등을 활용한 반복 업무 자동화와 운영 문서 작성 경험도 갖고 있습니다.</p>
+      <p>현재는 한화시스템 AI Agent 서비스 개발 과정을 수강하며, 개인 프로젝트로 AI Agent 개발 역량을 넓히고 있습니다.</p>
+    </div>
+    <ul class="info">
+      <li><b>Role</b>System Engineer</li>
+      <li><b>Email</b><a href="mailto:huidl197@gmail.com">huidll97@gmail.com</a></li>
+      <li><b>GitHub</b><a href="https://github.com/KRdahee">github.com/KRdahee</a></li>
+      <li><b>Language</b>영어 비즈니스 · 중국어 일상 회화</li>
+    </ul>
+  </div>
+</div></section>
+
+<section id="experience">
+  <div class="wrap reveal">
+    <h2>Experience</h2>
+    <div class="timeline">
+
+      <!-- 미래내일 일경험 -->
+      <div class="tl-item">
+        <div class="tl-card">
+          <div class="tl-head">
+            <h3>미래내일 일경험 인턴</h3>
+            <span class="period">2026.03 - 2026.07</span>
+          </div>
+          <div class="sub">단기 인턴</div>
+          <ul>
+            <li>일신원 기획사업팀에서 사회복지 프로그램 운영 및 활동 지원</li>
+            <li>프로그램 결과 기록, 행정 문서 관리 및 사업 운영 자료 정리</li>
+            <li>여가·자율외출·경제쇼핑 프로그램 운영 보조 및 ESG·지역사회 연계 활동 지원</li>
+            <li>기획사업 관련 홍보자료 제작 및 행정 업무 지원</li>
+            <li>헵시바 품질팀에서 완제품 외관 검사 및 품질 확인 업무 보조</li>
+            <li>스크래치·오염 등 제품 불량 확인, 불량품 분류 및 검사 결과 기록</li>
+            <li>품질 기준표에 따른 체크리스트 작성 보조 및 품질 문서 관리</li>
+            <li>샘플 제품 분류, 보관 및 검사 관련 자료 정리</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 제이플래닛 -->
+      <div class="tl-item">
+        <div class="tl-card">
+          <div class="tl-head">
+            <h3>제이플래닛</h3>
+            <span class="period">2025.04 - 2025.12</span>
+          </div>
+          <div class="sub">시스템 엔지니어(SE) | 솔루션사업2팀 | 기초과학연구원(IBS) 데이터센터 상주</div>
+          <ul>
+            <li>약 210대 규모의 Linux 기반 HPC 서버 인프라 운영 및 유지보수</li>
+            <li>CentOS/Rocky Linux 서버 상태 점검, OS 패치, 정기 PM 및 펌웨어 점검 수행</li>
+            <li>IBM·Lenovo 서버, Dell·HPE 스토리지 등 멀티 벤더 인프라 운영 및 유지보수 지원</li>
+            <li>Prometheus·Grafana 기반 시스템 모니터링 및 로그·진단 도구를 활용한 장애 분석</li>
+            <li>Slurm 기반 HPC 작업 스케줄링 관리 및 Job Pending·Node Down 장애 대응</li>
+            <li>SSH/SFTP 접속 장애 발생 시 Ping·TCP Port·Netcat 등을 활용한 네트워크 연결 상태 점검</li>
+            <li>LDAP/SSSD 사용자 인증, 계정·접근 권한, 스토리지 마운트 및 파일시스템 장애 대응</li>
+            <li>Lustre·IBM Spectrum Scale(GPFS)·NFS 스토리지 운영 지원 및 수십 TB 규모 연구 데이터 이관 지원</li>
+            <li>약 900명의 연구자를 대상으로 계정·권한 관리, GPU 자원, 소프트웨어 설치 및 환경 설정 기술지원</li>
+            <li>외국인 연구자 대상 영어·중국어 기술 문의 대응 및 사용자 가이드·운영 문서 관리</li>
+            <li>Shell Script·Python·Perl·Crontab을 활용한 반복 운영 업무 자동화</li>
+            <li>MySQL 기반 HPC 작업·스토리지 사용량 조회 및 GPU·Node·CPU·스토리지 과금 Perl 스크립트 유지보수</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 온율학원 / 브이코랩 -->
+      <div class="tl-item">
+        <div class="tl-card">
+          <div class="tl-head">
+            <h3>온율학원 · 브이코랩</h3>
+            <span class="period">온율학원 (2023.01 ~ 2023.12) / 브이코랩 (2024.04 ~ 2024.12)</span>
+          </div>
+          <div class="sub">웹 개발 | 웹 애플리케이션 개발 및 웹 시스템 운영·유지보수</div>
+          <ul>
+            <li>Apache Tomcat(WAS) 기반 웹 서비스 배포 및 운영 환경 관리</li>
+            <li>Linux·Windows 환경의 개발·운영 서버 관리 및 시스템 상태 점검</li>
+            <li>Git 기반 소스 코드 형상관리 및 개발·운영 환경 분리 관리</li>
+            <li>소스 코드, DB 데이터 및 시스템 설정 파일의 백업 관리와 복구 지원</li>
+            <li>Apache·Tomcat·Oracle DB 연계 구조를 바탕으로 웹 서비스 운영 환경 관리</li>
+            <li>WAS·DB·애플리케이션 로그를 활용한 서비스 장애 및 연동 오류 분석</li>
+            <li>Oracle DB·SQL 쿼리 분석 및 데이터 처리 개선을 통한 서비스 성능 최적화</li>
+            <li>사용자 요구사항을 반영한 반응형 웹 UI 개선 및 기능 유지보수</li>
+            <li>웹 애플리케이션 개발부터 배포·DB 연계·운영 유지보수까지 서비스 생명주기 전반 경험</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 순천향대학교 -->
+      <div class="tl-item">
+        <div class="tl-card">
+          <div class="tl-head">
+            <h3>순천향대학교</h3>
+            <span class="period">2021.10 - 2022.09</span>
+          </div>
+          <div class="sub">행정조교 | 학사행정 및 학과 운영 지원</div>
+          <ul>
+            <li>학사행정, 예산·문서 관리 및 공문 처리 등 학과 행정 업무 수행</li>
+            <li>학생 학사·장학 관련 문의 및 민원 응대</li>
+            <li>교수 수업·연구 관련 행정 업무 지원</li>
+            <li>실습실·기자재·소프트웨어 관리 및 학과 행사 운영 지원</li>
+            <li>학과 평가 및 관련 자료 준비·정리</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap reveal">
+    <h2>Tech Stack</h2>
+
+    <div class="skills">
+
+      <div class="skill">
+        <h3>Server & Linux Infrastructure</h3>
+        <span class="chip">Linux</span>
+        <span class="chip">CentOS / Rocky Linux</span>
+        <span class="chip">Server Administration</span>
+        <span class="chip">OS Patching</span>
+        <span class="chip">Preventive Maintenance</span>
+        <span class="chip">IBM / Lenovo Servers</span>
+        <span class="chip">Dell / HPE Storage</span>
+      </div>
+
+      <div class="skill">
+        <h3>HPC & Storage</h3>
+        <span class="chip">HPC Cluster</span>
+        <span class="chip">SLURM</span>
+        <span class="chip">Lustre</span>
+        <span class="chip">IBM Spectrum Scale (GPFS)</span>
+        <span class="chip">NFS</span>
+        <span class="chip">LDAP / SSSD</span>
+        <span class="chip">Storage Management</span>
+        <span class="chip">Data Migration</span>
+      </div>
+
+      <div class="skill">
+        <h3>Monitoring & Troubleshooting</h3>
+        <span class="chip">Prometheus</span>
+        <span class="chip">Grafana</span>
+        <span class="chip">System Log Analysis</span>
+        <span class="chip">Incident Response</span>
+        <span class="chip">Network Diagnostics</span>
+        <span class="chip">SSH / SFTP</span>
+        <span class="chip">Ping / TCP Port / Netcat</span>
+      </div>
+
+      <div class="skill">
+        <h3>Scripting & Automation</h3>
+        <span class="chip">Shell Script</span>
+        <span class="chip">Python</span>
+        <span class="chip">Perl</span>
+        <span class="chip">cron / Crontab</span>
+        <span class="chip">MySQL</span>
+        <span class="chip">Operational Automation</span>
+      </div>
+
+      <div class="skill">
+        <h3>Web & Middleware</h3>
+        <span class="chip">Java</span>
+        <span class="chip">Apache Tomcat</span>
+        <span class="chip">REST API</span>
+        <span class="chip">Oracle Database</span>
+        <span class="chip">SQL</span>
+        <span class="chip">Git</span>
+        <span class="chip">Web Service Operations</span>
+        <span class="chip">Backup & Recovery</span>
+      </div>
+
+      <div class="skill">
+        <h3>AI Agent Development</h3>
+        <span class="chip">Python</span>
+        <span class="chip">FastAPI</span>
+        <span class="chip">LangChain</span>
+        <span class="chip">LangGraph</span>
+        <span class="chip">RAG</span>
+        <span class="chip">FAISS / Chroma</span>
+        <span class="chip">Tool Calling</span>
+        <span class="chip">MCP</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="projects"><div class="wrap reveal">
+  <h2>Projects</h2>
+<div class="card"><span class="badge">진행 중</span>
+  <h3>GolbangTripXMoveIt</h3>
+  <div class="tags">개인 프로젝트 · 2026.10 ~ · AI Agent · Python · FastAPI · Gemini API</div>
+<p>
+  <b>프로젝트 개요</b><br>
+  여행 계획 수립에 드는 시간과 에너지를 줄이고, 여행 준비보다 휴식 자체에 집중할 수 있도록 기획한 AI 기반 힐링 자유여행 에이전트 서비스입니다. 반복되는 업무와 일상에 지친 직장인, 복잡한 일정과 붐비는 관광지에 피로감을 느끼는 여행자를 대상으로 합니다. 아산 온양온천과 같은 소도시의 조용한 로컬 여행지를 중심으로 개인의 취향과 여행 목적에 맞는 휴식 경험을 제공하는 것을 목표로 합니다.<br><br>
+
+  <b>핵심 개발 방향</b><br>
+  · No-Energy 여행 경험: 최소한의 사용자 입력만으로 여행 계획 수립에 필요한 부담을 줄이는 대화형 인터페이스<br>
+  · 로컬 힐링 큐레이션: 유명 관광지 위주의 추천에서 벗어나 조용한 소도시의 숨은 여행지를 발굴하고 소개하는 개인화 추천 기능<br>
+  · 여행 일정 자동화: 장소 간 이동 거리와 소요 시간, 휴식 시간을 고려해 무리하지 않는 여행 동선을 구성하는 기능<br>
+  · AI 에이전트 확장: 단순한 질의응답을 넘어 여행지 탐색, 일정 설계, 정보 확인 등 여러 작업을 단계적으로 연결하는 구조<br><br>
+
+  <b>주요 개발 내용</b><br>
+  · Google Gemini API를 연동한 자연어 기반 AI 챗봇 구현<br>
+  · Python 및 FastAPI 기반 백엔드 구성과 일부 API 엔드포인트 개발<br>
+  · HTML5, Sass(SCSS), JavaScript, Vite를 활용한 프론트엔드 개발<br>
+  · SQLite를 활용한 로컬 데이터 저장 환경 구성 및 실행 로그 관리<br>
+  · 프론트엔드와 백엔드를 연동하고 로컬 환경에서 주요 기능을 확인하며 개발 진행<br><br>
+
+  <b>기술 스택</b><br>
+  AI: Google Gemini API<br>
+  Backend: Python · FastAPI<br>
+  Database: SQLite<br>
+  Frontend: HTML5 · Sass(SCSS) · JavaScript · Vite<br>
+  Development: VS Code · 로컬 개발 및 테스트 환경<br><br>
+
+  <b>향후 개발 계획</b><br>
+  · RAG 기반 로컬 여행지 검색: ChromaDB를 활용해 여행지 정보를 검색하고, 검색 결과를 바탕으로 답변과 추천의 구체성을 높이는 기능 개발<br>
+  · 취향 기반 일정 추천: 여행 목적, 선호 분위기, 이동 부담 및 휴식 시간을 고려한 개인화 일정 설계 기능 개발<br>
+  · 외부 여행 정보 API 연동: 항공권 등 외부 정보를 조회하고, 실제 제공 범위와 API 이용 조건을 검토해 연동 기능 확장<br>
+  · 일정 및 예외 상황 대응: 이동 동선 최적화, 일정 변경 시 대안 제안, 여행 중 발생할 수 있는 변수에 대응하는 기능 설계<br>
+  · 서비스 안정성 및 보안 강화: 입력 데이터 검증, 민감 정보 보호, 오류 처리 및 사용자 승인 절차를 단계적으로 적용<br>
+  · 멀티 에이전트 및 여행 기록 확장: 동행자 간 취향 조율, 여행 기록을 활용한 개인화 아카이브 등 고도화 기능 검토<br><br>
+
+  <b>프로젝트 진행 방향</b><br>
+  현재 구현한 AI 챗봇과 웹 애플리케이션을 기반으로 기능을 점진적으로 확장하고 있습니다. 기능을 단순히 나열하는 데 그치지 않고, 데이터 수집과 검색, AI 응답 생성, 결과 검증 및 사용자 경험 개선이 연결되는 구조를 목표로 개발하고 있습니다.<br><br>
+
+  <b>프로젝트 저장소</b><br>
+  <a href="https://github.com/KRdahee/GolbangTripXMoveIt_2026" target="_blank" rel="noopener noreferrer">GitHub에서 프로젝트 소스 코드 및 개발 문서 확인하기</a>
+</p>
+</div>
+  <br>
+<div class="card">
+  <span class="badge">진행 중</span>
+  <h3>사내 기획서 자동 검토 및 공기업 양식 변환 멀티 에이전트</h3>
+  <div class="tags">개인 프로젝트 · 2026 · AI Agent · Python · LLM</div>
+  <p>
+    <b>프로젝트 개요</b><br>
+    사내 기획서 초안을 분석하고 공기업 문서 표준에 맞춰 내용을 검토·변환하는 AI 기반 문서 자동화 시스템입니다. 반복적인 문서 검토 업무를 줄이고, 문서의 논리적 구성과 표현을 일관되게 개선하는 것을 목표로 합니다.<br><br>
+    <b>주요 기획 내용</b><br>
+    · 기획서의 논리적 결함과 필수 항목 누락을 분석하는 문서 검토 기능<br>
+    · 공기업 문서 양식과 개조식 표현에 맞춘 본문 변환 기능<br>
+    · SWOT 분석 및 정량적 자료 보완 기능<br>
+    · AI 생성 결과에 대한 사용자 검토 및 수정 프로세스<br><br>
+    <b>현재 개발 방향</b><br>
+    Python과 LLM API를 활용한 문서 분석 및 변환 기능을 중심으로 프로젝트를 구체화하고 있습니다.<br><br>
+    <b>향후 개발 계획</b><br>
+    LangGraph 기반 멀티 에이전트 워크플로우, Pydantic 기반 출력 데이터 검증, HITL 기반 승인 프로세스를 단계적으로 구현할 계획입니다. 이후 FastAPI 및 Streamlit을 활용한 서비스 인터페이스와 문서 출력 기능을 고도화할 예정입니다.
+  </p>
+</div>
+<br>
+<div class="card">
+  <span class="badge">진행 중</span>
+  <h3>오픈소스 이슈 자동 분석 및 코드 리팩토링 에이전트</h3>
+  <div class="tags">개인 프로젝트 · 2026 · AI Agent · Python · GitHub</div>
+  <p>
+    <b>프로젝트 개요</b><br>
+    GitHub 이슈를 바탕으로 코드의 문제 원인을 분석하고 수정 방향을 제안하며, 테스트 기반 검증까지 연결하는 AI 기반 소프트웨어 유지보수 자동화 프로젝트입니다. 반복적인 버그 분석과 코드 개선 작업을 줄이고 유지보수 효율을 높이는 것을 목표로 합니다.<br><br>
+    <b>주요 기획 내용</b><br>
+    · GitHub 이슈 및 오류 정보를 활용한 문제 분석 기능<br>
+    · LLM 기반 코드 분석 및 리팩토링 제안 기능<br>
+    · 테스트 실행을 통한 코드 변경 결과 검증<br>
+    · 테스트 실패 원인 분석 및 수정 재시도 워크플로우<br>
+    · 코드 변경 사항을 검토하고 Pull Request를 생성하는 자동화 흐름<br><br>
+    <b>현재 개발 방향</b><br>
+    GitHub 이슈 분석부터 코드 개선 및 검증까지 이어지는 자동화 흐름을 설계하고 있습니다.<br><br>
+    <b>향후 개발 계획</b><br>
+    LangGraph 기반 에이전트 실행 및 재시도 루프, Pytest 기반 테스트 자동화, Docker 샌드박스 기반 코드 실행 격리를 단계적으로 구현할 계획입니다. 이후 GitHub API 연동과 Pull Request 생성 기능을 추가하여 안전한 코드 유지보수 자동화 파이프라인으로 발전시킬 예정입니다.
+  </p>
+</div>
+<br>
+<div class="card">
+      <h3>BODEUM Benchmarking</h3>
+      <div class="tags">팀 프로젝트 · 5명 · 2022.12 (3주) · Java · JSP/Servlet · MyBatis · Oracle SQL</div>
+
+      <p>반려견 교육 정보와 관련 상품을 함께 제공하는 웹사이트를 개발한 팀 프로젝트입니다. 요구사항 분석 단계에서 교육 서비스, 커뮤니티, 쇼핑몰 및 관리자 기능을 설계했으며, 백엔드 개발을 담당했습니다.</p>
+<br>
+      <p>
+        - <strong>담당 역할:</strong> 백엔드 개발<br>
+        - <strong>개발 환경:</strong> Visual Studio Code, STS<br>
+        - <strong>서버 측 기술:</strong> Java, JSP/Servlet 기반 웹 프로젝트<br>
+        - <strong>데이터 접근:</strong> MyBatis Mapper XML 구조 확인, Oracle SQL 연동<br>
+        - <strong>주요 기능:</strong> 회원 기능, 교육 정보 및 후기 게시판, 상품 조회, 장바구니, 주문, 관리자 페이지
+      </p>
+<br>
+      <p><strong>프로젝트 경험:</strong> 웹서비스의 요구사항을 분석하고 Java 기반 백엔드와 데이터베이스를 연동하는 프로젝트를 수행했습니다. 교육 서비스와 쇼핑몰 기능을 하나의 웹사이트에서 제공하기 위한 기능 구성을 경험했습니다.</p>
+    </div>
+<br>
+    <div class="card">
+      <h3>Movie &amp; Review Recommendation TV Site</h3>
+      <div class="tags">팀 프로젝트 · 5명 · 2022.11 (3주) · Java · JSP/Servlet · HTML5 · CSS3 · Oracle SQL</div>
+
+      <p>영화 및 미디어 정보를 조회하고 리뷰를 확인할 수 있는 웹 서비스 프로젝트입니다. 프론트엔드와 백엔드 개발을 함께 수행하며 웹 페이지 구성부터 서버 측 로직 및 데이터베이스 연동까지 웹 애플리케이션의 전반적인 개발 과정을 경험했습니다.</p>
+<br>
+      <p>
+        - <strong>담당 역할:</strong> 프론트엔드 및 백엔드 개발<br>
+        - <strong>개발 환경:</strong> Visual Studio Code, STS<br>
+        - <strong>프론트엔드:</strong> HTML5, CSS3를 활용한 웹 페이지 구성<br>
+        - <strong>서버 측 기술:</strong> Java, JSP/Servlet 기반 웹 애플리케이션<br>
+        - <strong>데이터베이스:</strong> Oracle SQL 연동<br>
+        - <strong>주요 기능:</strong> 영화 정보 조회, 미디어 리뷰 및 추천 관련 기능
+      </p>
+<br>
+      <p><strong>프로젝트 경험:</strong> 사용자 화면 구성부터 서버와 데이터베이스의 연동까지 웹서비스의 전체적인 구조를 경험했습니다. 프론트엔드와 백엔드 간 데이터 처리 흐름을 이해하고 웹 애플리케이션 개발 역량을 쌓았습니다.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="education"><div class="wrap reveal">
+  <h2>Education &amp; Training</h2>
+  <div class="timeline">
+    <div class="tl-item now"><div class="tl-card">
+      <div class="tl-head"><h3>한화시스템 AI Agent 서비스 개발 과정</h3><span class="period">2026.09 - 진행 중</span></div>
+      <div class="sub">Python 기반 AI 서비스 백엔드 개발 및 AI Agent 구축 실무 교육</div>
+      <ul>
+        <li>Python, FastAPI 기반 REST API 및 백엔드 서비스 개발</li>
+        <li>LLM 및 LangChain 기반 AI 서비스 구현</li>
+        <li>Embedding, Vector DB, FAISS/Chroma 기반 RAG 시스템 구축, Query Rewriting·Hybrid Search 최적화</li>
+        <li>AI Agent, Function Calling, MCP, LangGraph 기반 Agent 및 Multi-Agent 시스템 구현</li>
+        <li>GitHub 협업, 테스트, Enterprise AI Agent 서비스 설계 및 캡스톤 프로젝트</li>
+      </ul>
+    </div></div>
+    <div class="tl-item"><div class="tl-card">
+      <div class="tl-head"><h3>2023 AI SW 온라인기반 코딩 역량 강화 교육</h3><span class="period">2023.07 - 2023.12</span></div>
+      <div class="sub">과학기술정보통신부 · 정보통신산업진흥원</div>
+      <ul><li>Java 객체지향 프로그래밍 및 웹 애플리케이션 개발, HTML·CSS·JavaScript 웹 페이지 구현</li><li>데이터베이스 활용 및 SQL 기반 데이터 처리, 서버·클라이언트 구조 이해</li></ul>
+    </div></div>
+    <div class="tl-item"><div class="tl-card">
+      <div class="tl-head"><h3>충청권 데이터 분야 인력양성 과정 (KT-AICE)</h3><span class="period">2023.10</span></div>
+      <div class="sub">코드스테이츠 &amp; 충청ICT이노베이션스퀘어</div>
+      <ul><li>AI·데이터 분석 기초 이론, 머신러닝/딥러닝 기반 분석 모델 학습 및 실습</li><li>데이터 전처리, 모델 평가 방법 이해 / KT-AICE Basic(인공지능) 자격증 취득</li></ul>
+    </div></div>
+    <div class="tl-item"><div class="tl-card">
+      <div class="tl-head"><h3>빅데이터 플랫폼 구축 및 분석 전문가 과정</h3><span class="period">2021.06 - 2021.11</span></div>
+      <div class="sub">선문대학교</div>
+      <ul><li>Java(JSP, Servlet, JDBC), HTML·CSS·JavaScript·jQuery 웹 개발, SQL 및 관계형 DB 활용</li><li>R 기반 데이터 전처리·시각화·통계 분석, 머신러닝 기초(회귀, 의사결정나무, KNN, XGBoost, 군집 등)</li></ul>
+    </div></div>
+  </div>
+  <div class="two" style="margin-top:34px">
+    <div class="list"><h3>학력 · 어학연수</h3>
+      <div class="row">백석대학교 중어중문학과<span>2016.03 - 2021.02</span></div>
+      <div class="row">일본 해외 단기 어학연수<span>2022.08 - 2022.09</span></div>
+      <div class="row">중국 해외 단기 어학연수<span>2018.02 - 2018.07</span></div>
+    </div>
+    <div class="list"><h3>수료 및 자격증</h3>
+      <div class="row">Google AI Professional Certificate<span>2026</span></div>
+      <div class="row">OPIc IH (ACTFL)<span>2025</span></div>
+      <div class="row">KT-AICE Basic 인공지능<span>2023</span></div>
+      <div class="row">네트워크 전문가 1급<span>2023</span></div>
+      <div class="row">정보보안전문가 1급<span>2023</span></div>
+      <div class="row">2종보통운전면허<span>2021</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="activity"><div class="wrap reveal">
+  <h2>GitHub Activity</h2>
+  <div class="contrib">
+    <img src="https://ghchart.rshah.org/f28c28/KRdahee" alt="KRdahee GitHub contributions" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <p style="display:none">활동 그래프를 불러오지 못했습니다. <a href="https://github.com/KRdahee" style="color:var(--orange)">GitHub 프로필</a>에서 확인해 주세요.</p>
+  </div>
+</div></section>
+
+<section id="contact"><div class="wrap contact reveal">
+  <h2 style="justify-content:center">Contact</h2>
+  <p>궁금한 점이나 제안이 있으시면 편하게 연락 주세요.</p>
+  <a class="btn primary" href="mailto:huidl197@gmail.com">이메일 보내기</a>
+  <a class="btn ghost" href="https://github.com/KRdahee" target="_blank" rel="noopener">GitHub</a>
+</div></section>
+
+<footer>© 2026 이다희 (Dahee Lee) · github.com/KRdahee</footer>
+
+<script>
+  // scroll reveal
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.08});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // count-up stats
+  document.querySelectorAll('[data-count]').forEach(el=>{
+    const end=+el.dataset.count,suf=el.dataset.suffix||'',t0=performance.now(),dur=1400;
+    (function tick(t){const k=Math.min((t-t0)/dur,1);el.textContent=Math.round(end*k)+(k===1?suf:'');if(k<1)requestAnimationFrame(tick)})(t0);
+  });
+
+  // typing effect in terminal
+  const msgs=['echo "Hello, HPC & AI Agent"','squeue -u dahee','python agent.py --run'];
+  const out=document.getElementById('typed');let m=0,c=0,del=false;
+  (function type(){
+    const s=msgs[m];
+    out.textContent=s.slice(0,c);
+    if(!del&&c<s.length){c++;setTimeout(type,70)}
+    else if(!del){del=true;setTimeout(type,1400)}
+    else if(c>0){c--;setTimeout(type,30)}
+    else{del=false;m=(m+1)%msgs.length;setTimeout(type,300)}
+  })();
+</script>
+</body>
+</html>
